@@ -96,9 +96,7 @@ public abstract class AbstractEnvironmentVariables implements EnvironmentVariabl
   protected boolean isExported(String name) {
 
     if (this.parent != null) {
-      if (this.parent.isExported(name)) {
-        return true;
-      }
+      return this.parent.isExported(name);
     }
     return false;
   }

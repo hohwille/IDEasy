@@ -71,7 +71,7 @@ public abstract class VariableLine {
 
   static final class Variable extends VariableLine {
 
-    private boolean export;
+    private final boolean export;
 
     private final String name;
 

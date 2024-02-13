@@ -1,15 +1,15 @@
 package com.devonfw.tools.ide.common;
 
+import com.devonfw.tools.ide.IdeTest;
+import org.junit.jupiter.api.Test;
+
 import java.util.Collection;
 import java.util.Set;
-
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link Tag}.
  */
-public class TagTest extends Assertions {
+public class TagTest extends IdeTest {
 
   /**
    * Test various predefined {@link Tag}s.

@@ -196,7 +196,7 @@ public final class VersionIdentifier implements VersionObject<VersionIdentifier>
     StringBuilder sb = new StringBuilder();
     VersionSegment segment = this.start;
     while (segment != null) {
-      sb.append(segment.toString());
+      sb.append(segment);
       segment = segment.getNextOrNull();
     }
     return sb.toString();

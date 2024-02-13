@@ -1,18 +1,17 @@
 package com.devonfw.tools.ide.environment;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-
+import com.devonfw.tools.ide.IdeTest;
 import com.devonfw.tools.ide.environment.VariableLine.Comment;
 import com.devonfw.tools.ide.environment.VariableLine.Empty;
 import com.devonfw.tools.ide.environment.VariableLine.Garbage;
 import com.devonfw.tools.ide.environment.VariableLine.Variable;
 import com.devonfw.tools.ide.log.IdeSlf4jRootLogger;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link VariableLine}.
  */
-public class VariableLineTest extends Assertions {
+public class VariableLineTest extends IdeTest {
 
   private static final IdeSlf4jRootLogger LOGGER = IdeSlf4jRootLogger.of();
 

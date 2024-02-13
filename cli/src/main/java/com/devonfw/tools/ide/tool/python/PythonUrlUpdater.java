@@ -18,12 +18,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class PythonUrlUpdater extends JsonUrlUpdater<PythonJsonObject> {
 
-  /**
-   * The base Url of the Python versions Json
-   */
-  private String VERSION_BASE_URL = "https://raw.githubusercontent.com";
+  /** The base Url of the Python versions Json. */
+  private static final String VERSION_BASE_URL = "https://raw.githubusercontent.com";
 
-  private final static String VERSION_FILENAME = "actions/python-versions/main/versions-manifest.json";
+  private static final String VERSION_FILENAME = "actions/python-versions/main/versions-manifest.json";
 
   final static ObjectMapper MAPPER = JsonMapping.create();
 

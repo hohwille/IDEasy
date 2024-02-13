@@ -278,10 +278,7 @@ public interface IdeLogger {
 
   private static boolean isBlank(String string) {
 
-    if ((string == null) || (string.isBlank())) {
-      return true;
-    }
-    return false;
+    return (string == null) || (string.isBlank());
   }
 
 }

@@ -1,12 +1,12 @@
 package com.devonfw.tools.ide.io;
 
-import org.assertj.core.api.Assertions;
+import com.devonfw.tools.ide.IdeTest;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link TarCompression}.
  */
-public class TarCompressionTest extends Assertions {
+public class TarCompressionTest extends IdeTest {
 
   /** Test of {@link TarCompression#of(String)}. */
   @Test

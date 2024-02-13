@@ -122,7 +122,7 @@ public class DirectoryMergerTest extends AbstractIdeContextTest {
 
     private final String key;
 
-    private String value;
+    private final String value;
 
     private Prop(String key, String value) {
 

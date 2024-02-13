@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import com.devonfw.tools.ide.IdeTest;
 import com.devonfw.tools.ide.url.model.folder.UrlRepository;
 import com.devonfw.tools.ide.url.updater.JsonUrlUpdater;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
@@ -22,7 +22,7 @@ import com.github.tomakehurst.wiremock.junit5.WireMockTest;
  * Test class for integrations of the {@link AndroidStudioUrlUpdater}.
  */
 @WireMockTest(httpPort = 8080)
-public class AndroidStudioJsonUrlUpdaterTest extends Assertions {
+public class AndroidStudioJsonUrlUpdaterTest extends IdeTest {
 
   /**
    * Test resource location

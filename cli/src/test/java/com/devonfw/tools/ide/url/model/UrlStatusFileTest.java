@@ -1,11 +1,6 @@
 package com.devonfw.tools.ide.url.model;
 
-import java.nio.file.Path;
-import java.time.Instant;
-
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-
+import com.devonfw.tools.ide.IdeTest;
 import com.devonfw.tools.ide.url.model.file.UrlStatusFile;
 import com.devonfw.tools.ide.url.model.file.json.StatusJson;
 import com.devonfw.tools.ide.url.model.file.json.UrlStatus;
@@ -14,11 +9,15 @@ import com.devonfw.tools.ide.url.model.folder.UrlEdition;
 import com.devonfw.tools.ide.url.model.folder.UrlRepository;
 import com.devonfw.tools.ide.url.model.folder.UrlTool;
 import com.devonfw.tools.ide.url.model.folder.UrlVersion;
+import org.junit.jupiter.api.Test;
+
+import java.nio.file.Path;
+import java.time.Instant;
 
 /**
  * Test of {@link UrlStatusFile}.
  */
-public class UrlStatusFileTest extends Assertions {
+public class UrlStatusFileTest extends IdeTest {
 
   /**
    * Test of {@link UrlStatusFile#getStatusJson()}.

@@ -1,12 +1,12 @@
 package com.devonfw.tools.ide.util;
 
-import org.assertj.core.api.Assertions;
+import com.devonfw.tools.ide.IdeTest;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link FilenameUtil}.
  */
-public class FilenameUtilTest extends Assertions {
+public class FilenameUtilTest extends IdeTest {
 
   /**
    * Test of {@link FilenameUtil#getExtension(String)}.

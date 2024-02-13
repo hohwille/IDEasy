@@ -1,15 +1,15 @@
 package com.devonfw.tools.ide.environment;
 
+import com.devonfw.tools.ide.IdeTest;
+import org.junit.jupiter.api.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStreamWriter;
-
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link SortedProperties}.
  */
-public class SortedPropertiesTest extends Assertions {
+public class SortedPropertiesTest extends IdeTest {
 
   /**
    * Test of {@link SortedProperties}.

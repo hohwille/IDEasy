@@ -1,12 +1,12 @@
 package com.devonfw.tools.ide.os;
 
-import org.assertj.core.api.Assertions;
+import com.devonfw.tools.ide.IdeTest;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link SystemInfoImpl}.
  */
-public class SystemInformationImplTest extends Assertions {
+public class SystemInformationImplTest extends IdeTest {
 
   /** Test {@link SystemInfoImpl#SystemInfoImpl()}. */
   @Test

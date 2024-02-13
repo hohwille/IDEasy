@@ -1,22 +1,21 @@
 package com.devonfw.tools.ide.environment;
 
+import com.devonfw.tools.ide.IdeTest;
+import com.devonfw.tools.ide.context.IdeTestContextMock;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import com.devonfw.tools.ide.context.IdeTestContextMock;
-import org.junit.jupiter.api.io.TempDir;
-
 /**
  * Test of {@link EnvironmentVariablesPropertiesFile}.
  */
 @SuppressWarnings("javadoc")
-class EnvironmentVariablesPropertiesFileTest extends Assertions {
+class EnvironmentVariablesPropertiesFileTest extends IdeTest {
 
   /**
    * Test of {@link EnvironmentVariablesPropertiesFile} including legacy support.

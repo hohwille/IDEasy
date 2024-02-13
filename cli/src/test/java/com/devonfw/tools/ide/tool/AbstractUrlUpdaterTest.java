@@ -1,7 +1,6 @@
 package com.devonfw.tools.ide.tool;
 
-import org.assertj.core.api.Assertions;
-
+import com.devonfw.tools.ide.IdeTest;
 import com.devonfw.tools.ide.url.model.file.UrlStatusFile;
 import com.devonfw.tools.ide.url.model.file.json.StatusJson;
 import com.devonfw.tools.ide.url.model.folder.UrlEdition;
@@ -9,7 +8,7 @@ import com.devonfw.tools.ide.url.model.folder.UrlRepository;
 import com.devonfw.tools.ide.url.model.folder.UrlTool;
 import com.devonfw.tools.ide.url.model.folder.UrlVersion;
 
-public class AbstractUrlUpdaterTest extends Assertions {
+public class AbstractUrlUpdaterTest extends IdeTest {
 
   /**
    * @param urlRepository {@link UrlRepository} to use

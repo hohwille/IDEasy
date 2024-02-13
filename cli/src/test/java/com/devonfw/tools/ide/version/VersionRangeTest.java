@@ -1,12 +1,12 @@
 package com.devonfw.tools.ide.version;
 
-import org.assertj.core.api.Assertions;
+import com.devonfw.tools.ide.IdeTest;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link VersionRange}.
  */
-public class VersionRangeTest extends Assertions {
+public class VersionRangeTest extends IdeTest {
 
   /** Test of {@link VersionRange#of(String)}. */
   @Test

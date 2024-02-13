@@ -92,10 +92,7 @@ public final class MacOsHelper {
     if (INVALID_LINK_FOLDERS.contains(filename) || filename.startsWith("_")) {
       return false;
     }
-    if (Files.isDirectory(path.resolve(IdeContext.FOLDER_BIN))) {
-      return true;
-    }
-    return false;
+    return Files.isDirectory(path.resolve(IdeContext.FOLDER_BIN));
   }
 
 }

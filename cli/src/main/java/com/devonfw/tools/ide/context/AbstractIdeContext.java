@@ -251,7 +251,7 @@ public abstract class AbstractIdeContext implements IdeContext {
 
   /**
    * @return the status message about the {@link #getIdeHome() IDE_HOME} detection and environment variable
-   *         initialization.
+   * initialization.
    */
   public String getMessageIdeHome() {
 
@@ -266,10 +266,7 @@ public abstract class AbstractIdeContext implements IdeContext {
    */
   public boolean isTest() {
 
-    if (isMock()) {
-      return true;
-    }
-    return false;
+    return isMock();
   }
 
   /**
@@ -294,8 +291,8 @@ public abstract class AbstractIdeContext implements IdeContext {
       return false;
     } else if (dir.toString().endsWith("/scripts/src/main/resources")) {
       // TODO does this still make sense for our new Java based product?
-      return false;
-    }
+        return false;
+      }
     return true;
   }
 
@@ -816,7 +813,7 @@ public abstract class AbstractIdeContext implements IdeContext {
    *        {@link #apply(CliArguments, Commandlet, CompletionCandidateCollector) apply} and {@link Commandlet#run()
    *        run}.
    * @return {@code true} if the given {@link Commandlet} matched and did {@link Commandlet#run() run} successfully,
-   *         {@code false} otherwise (the {@link Commandlet} did not match and we have to try a different candidate).
+   * {@code false} otherwise (the {@link Commandlet} did not match and we have to try a different candidate).
    */
   private boolean applyAndRun(CliArguments arguments, Commandlet cmd) {
 
@@ -877,7 +874,7 @@ public abstract class AbstractIdeContext implements IdeContext {
 
   /**
    * @param arguments the {@link CliArguments} to apply. Will be {@link CliArguments#next() consumed} as they are
-   *        matched. Consider passing a {@link CliArguments#copy() copy} as needed.
+   * matched. Consider passing a {@link CliArguments#copy() copy} as needed.
    * @param cmd the potential {@link Commandlet} to match.
    * @param collector the {@link CompletionCandidateCollector}.
    * @return {@code true} if the given {@link Commandlet} matches to the given {@link CliArgument}(s) and those have

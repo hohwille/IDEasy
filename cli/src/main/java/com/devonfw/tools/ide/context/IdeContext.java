@@ -155,10 +155,7 @@ public interface IdeContext extends IdeLogger {
 
     String yes = "yes";
     String option = question(question, yes, "no");
-    if (yes.equals(option)) {
-      return true;
-    }
-    return false;
+    return yes.equals(option);
   }
 
   /**

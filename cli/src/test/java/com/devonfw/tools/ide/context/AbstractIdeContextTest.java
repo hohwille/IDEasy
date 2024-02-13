@@ -1,29 +1,28 @@
 package com.devonfw.tools.ide.context;
 
-import java.nio.file.Path;
-import java.util.List;
-
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.Condition;
-import org.assertj.core.api.ListAssert;
-
+import com.devonfw.tools.ide.IdeTest;
 import com.devonfw.tools.ide.io.FileAccess;
 import com.devonfw.tools.ide.io.FileAccessImpl;
 import com.devonfw.tools.ide.io.FileCopyMode;
 import com.devonfw.tools.ide.io.IdeProgressBarTestImpl;
 import com.devonfw.tools.ide.log.IdeLogLevel;
 import com.devonfw.tools.ide.log.IdeTestLogger;
+import org.assertj.core.api.Condition;
+import org.assertj.core.api.ListAssert;
+
+import java.nio.file.Path;
+import java.util.List;
 
 /**
  * Abstract base class for tests that need mocked instances of {@link IdeContext}.
  */
-public abstract class AbstractIdeContextTest extends Assertions {
+public abstract class AbstractIdeContextTest extends IdeTest {
 
   /** {@link #newContext(String) Name of test project} {@value}. */
   protected static final String PROJECT_BASIC = "basic";
 
   /** The source {@link Path} to the test projects. */
-  protected static final Path PATH_PROJECTS = Path.of("src/test/resources/ide-projects");
+  protected static final Path PATH_PROJECTS = TEST_RESOURCES.resolve("ide-projects");
 
   // will not use eclipse-target like done in maven via eclipse profile...
   private static final Path PATH_PROJECTS_COPY = Path.of("target/test-projects/");
@@ -104,7 +103,7 @@ public abstract class AbstractIdeContextTest extends Assertions {
    * @param level the expected {@link IdeLogLevel}.
    * @param message the expected {@link com.devonfw.tools.ide.log.IdeSubLogger#log(String) log message}.
    * @param contains - {@code true} if the given {@code message} may only be a sub-string of the log-message to assert,
-   *        {@code false} otherwise (the entire log message including potential parameters being filled in is asserted).
+   * {@code false} otherwise (the entire log message including potential parameters being filled in is asserted).
    */
   protected static void assertLogMessage(IdeTestContext context, IdeLogLevel level, String message, boolean contains) {
 

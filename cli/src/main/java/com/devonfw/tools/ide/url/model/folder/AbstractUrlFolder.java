@@ -129,7 +129,7 @@ public abstract class AbstractUrlFolder<C extends UrlArtifactWithParent<?>> exte
   public void save() {
 
     for (C child : this.childMap.values()) {
-      ((AbstractUrlArtifact) child).save();
+      child.save();
     }
   }
 }

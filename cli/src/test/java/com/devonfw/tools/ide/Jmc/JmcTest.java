@@ -1,22 +1,19 @@
 package com.devonfw.tools.ide.Jmc;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import com.devonfw.tools.ide.commandlet.InstallCommandlet;
 import com.devonfw.tools.ide.context.AbstractIdeContextTest;
 import com.devonfw.tools.ide.context.IdeContext;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 /**
  * Integration test of {@link com.devonfw.tools.ide.tool.jmc.Jmc}.
@@ -24,8 +21,6 @@ import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 public class JmcTest extends AbstractIdeContextTest {
 
   private static WireMockServer server;
-
-  private static Path resourcePath = Path.of("src/test/resources");
 
   @BeforeAll
   static void setUp() throws IOException {
@@ -49,19 +44,19 @@ public class JmcTest extends AbstractIdeContextTest {
     String linuxFilenameJava = "java-17.0.6-linux-x64.tgz";
     String resourceFilesDirName = "__files";
 
-    Path windowsFilePathJmc = resourcePath.resolve(resourceFilesDirName).resolve(windowsFilenameJmc);
+    Path windowsFilePathJmc = TEST_RESOURCES.resolve(resourceFilesDirName).resolve(windowsFilenameJmc);
     String windowsLengthJmc = String.valueOf(Files.size(windowsFilePathJmc));
 
-    Path linuxFilePathJmc = resourcePath.resolve(resourceFilesDirName).resolve(linuxFilenameJmc);
+    Path linuxFilePathJmc = TEST_RESOURCES.resolve(resourceFilesDirName).resolve(linuxFilenameJmc);
     String linuxLengthJmc = String.valueOf(Files.size(linuxFilePathJmc));
 
-    Path macOSFilePathJmc = resourcePath.resolve(resourceFilesDirName).resolve(macOSFilenameJmc);
+    Path macOSFilePathJmc = TEST_RESOURCES.resolve(resourceFilesDirName).resolve(macOSFilenameJmc);
     String maxOSLengthJmc = String.valueOf(Files.size(macOSFilePathJmc));
 
-    Path windowsFilePathJava = resourcePath.resolve(resourceFilesDirName).resolve(windowsFilenameJava);
+    Path windowsFilePathJava = TEST_RESOURCES.resolve(resourceFilesDirName).resolve(windowsFilenameJava);
     String windowsLengthJava = String.valueOf(Files.size(windowsFilePathJava));
 
-    Path linuxFilePathJava = resourcePath.resolve(resourceFilesDirName).resolve(linuxFilenameJava);
+    Path linuxFilePathJava = TEST_RESOURCES.resolve(resourceFilesDirName).resolve(linuxFilenameJava);
     String linuxLengthJava = String.valueOf(Files.size(linuxFilePathJava));
 
     setupMockServerResponse("/jmcTest/windows", "application/zip", windowsLengthJmc, windowsFilenameJmc);

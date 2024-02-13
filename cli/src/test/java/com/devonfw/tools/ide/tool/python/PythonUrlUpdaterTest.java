@@ -10,10 +10,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import com.devonfw.tools.ide.IdeTest;
 import com.devonfw.tools.ide.url.model.folder.UrlRepository;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 
@@ -21,9 +21,9 @@ import com.github.tomakehurst.wiremock.junit5.WireMockTest;
  * {@link WireMockTest} using {@link PythonUrlUpdaterMock}.
  */
 @WireMockTest(httpPort = 8080)
-public class PythonUrlUpdaterTest extends Assertions {
+public class PythonUrlUpdaterTest extends IdeTest {
 
-  private final static String testdataRoot = "src/test/resources/integrationtest/PythonJsonUrlUpdater";
+  private static final Path TESTDATA_ROOT = TEST_RESOURCES.resolve("integrationtest/PythonJsonUrlUpdater");
 
   /**
    * Test Python JsonUrlUpdater
@@ -35,11 +35,11 @@ public class PythonUrlUpdaterTest extends Assertions {
   public void testPythonURl(@TempDir Path tempPath) throws IOException {
 
     // given
-    stubFor(get(urlMatching("/actions/python-versions/main/.*")).willReturn(aResponse().withStatus(200)
-        .withBody(Files.readAllBytes(Path.of(testdataRoot).resolve("python-version.json")))));
+    stubFor(get(urlMatching("/actions/python-versions/main/.*")).willReturn(
+        aResponse().withStatus(200).withBody(Files.readAllBytes(TESTDATA_ROOT.resolve("python-version.json")))));
 
-    stubFor(any(urlMatching("/actions/python-versions/releases/download.*"))
-        .willReturn(aResponse().withStatus(200).withBody("aBody")));
+    stubFor(any(urlMatching("/actions/python-versions/releases/download.*")).willReturn(
+        aResponse().withStatus(200).withBody("aBody")));
 
     UrlRepository urlRepository = UrlRepository.load(tempPath);
     PythonUrlUpdaterMock pythonUpdaterMock = new PythonUrlUpdaterMock();

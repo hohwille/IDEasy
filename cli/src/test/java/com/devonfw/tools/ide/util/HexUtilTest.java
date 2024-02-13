@@ -1,12 +1,12 @@
 package com.devonfw.tools.ide.util;
 
-import org.assertj.core.api.Assertions;
+import com.devonfw.tools.ide.IdeTest;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link HexUtil}.
  */
-public class HexUtilTest extends Assertions {
+public class HexUtilTest extends IdeTest {
 
   /** Test of {@link HexUtil#toHexString(byte[])}. */
   @Test

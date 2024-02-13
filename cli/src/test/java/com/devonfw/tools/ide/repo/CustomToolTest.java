@@ -1,15 +1,14 @@
 package com.devonfw.tools.ide.repo;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-
+import com.devonfw.tools.ide.IdeTest;
 import com.devonfw.tools.ide.os.SystemInformationMock;
 import com.devonfw.tools.ide.version.VersionIdentifier;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link CustomTool}.
  */
-public class CustomToolTest extends Assertions {
+public class CustomToolTest extends IdeTest {
 
   /**
    * Test of {@link CustomTool}.

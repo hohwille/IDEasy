@@ -1,16 +1,16 @@
 package com.devonfw.tools.ide.version;
 
+import com.devonfw.tools.ide.IdeTest;
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 /**
  * Test of {@link VersionIdentifier}.
  */
-public class VersionIdentifierTest extends Assertions {
+public class VersionIdentifierTest extends IdeTest {
 
   /**
    * Test of {@link VersionIdentifier#of(String)}.

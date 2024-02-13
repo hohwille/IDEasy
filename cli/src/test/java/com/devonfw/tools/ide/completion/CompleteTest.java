@@ -1,23 +1,22 @@
 package com.devonfw.tools.ide.completion;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
-
+import com.devonfw.tools.ide.IdeTest;
 import com.devonfw.tools.ide.cli.CliArguments;
 import com.devonfw.tools.ide.commandlet.Commandlet;
 import com.devonfw.tools.ide.commandlet.ContextCommandlet;
 import com.devonfw.tools.ide.context.AbstractIdeContext;
 import com.devonfw.tools.ide.context.IdeTestContextMock;
 import com.devonfw.tools.ide.property.Property;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Test of {@link AbstractIdeContext#complete(CliArguments, boolean) auto-completion}.
  */
-public class CompleteTest extends Assertions {
+public class CompleteTest extends IdeTest {
 
   /** Test of {@link AbstractIdeContext#complete(CliArguments, boolean) auto-completion} for empty input. */
   @Test

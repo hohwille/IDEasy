@@ -1,12 +1,12 @@
 package com.devonfw.tools.ide.cli;
 
-import org.assertj.core.api.Assertions;
+import com.devonfw.tools.ide.IdeTest;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link CliArgument}.
  */
-public class CliArgumentTest extends Assertions {
+public class CliArgumentTest extends IdeTest {
 
   private CliArgument of(String... args) {
 

@@ -1,15 +1,15 @@
 package com.devonfw.tools.ide.util;
 
+import com.devonfw.tools.ide.IdeTest;
+import org.junit.jupiter.api.Test;
+
 import java.time.Duration;
 import java.time.Instant;
-
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link DateTimeUtil}.
  */
-public class DateTimeUtilTest extends Assertions {
+public class DateTimeUtilTest extends IdeTest {
 
   private static final Instant INSTANT_1999_12_31 = Instant.parse("1999-12-31T23:59:59.987654321Z");
 

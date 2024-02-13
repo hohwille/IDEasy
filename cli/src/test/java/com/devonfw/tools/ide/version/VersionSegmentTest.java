@@ -1,12 +1,12 @@
 package com.devonfw.tools.ide.version;
 
-import org.assertj.core.api.Assertions;
+import com.devonfw.tools.ide.IdeTest;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link VersionSegment}.
  */
-public class VersionSegmentTest extends Assertions {
+public class VersionSegmentTest extends IdeTest {
 
   /**
    * Test of {@link VersionSegment#ofEmpty()} and {@link VersionSegment#isEmpty()}.

@@ -1,12 +1,12 @@
 package com.devonfw.tools.ide.os;
 
-import org.assertj.core.api.Assertions;
+import com.devonfw.tools.ide.IdeTest;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test of {@link WindowsPathSyntax}.
  */
-public class WindowsPathSyntaxTest extends Assertions {
+public class WindowsPathSyntaxTest extends IdeTest {
 
   /** Test of {@link WindowsPathSyntax#WINDOWS}. */
   @Test

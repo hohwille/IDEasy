@@ -1,16 +1,15 @@
 package com.devonfw.tools.ide.json.mapping;
 
-import java.time.Instant;
-
-import org.assertj.core.api.Assertions;
+import com.devonfw.tools.ide.IdeTest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.Instant;
 
 /**
  * Test of {@link JsonMapping}.
  */
-public class JsonMappingTest extends Assertions {
+public class JsonMappingTest extends IdeTest {
 
   private static final String INSTANT_VALUE_STRING = "2001-12-31T23:59:59.987654321Z";
 
