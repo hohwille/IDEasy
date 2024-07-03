@@ -12,6 +12,7 @@ import com.devonfw.tools.ide.process.ProcessErrorHandling;
 import com.devonfw.tools.ide.process.ProcessMode;
 import com.devonfw.tools.ide.property.StringProperty;
 import com.devonfw.tools.ide.version.VersionIdentifier;
+import com.devonfw.tools.ide.version.VersionRange;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,12 +24,16 @@ import java.util.Set;
  */
 public abstract class ToolCommandlet extends Commandlet implements Tags {
 
-  /** @see #getName() */
+  /**
+   * @see #getName()
+   */
   protected final String tool;
 
   private final Set<Tag> tags;
 
-  /** The commandline arguments to pass to the tool. */
+  /**
+   * The commandline arguments to pass to the tool.
+   */
   public final StringProperty arguments;
 
   private MacOsHelper macOsHelper;
@@ -37,8 +42,8 @@ public abstract class ToolCommandlet extends Commandlet implements Tags {
    * The constructor.
    *
    * @param context the {@link IdeContext}.
-   * @param tool the {@link #getName() tool name}.
-   * @param tags the {@link #getTags() tags} classifying the tool. Should be created via {@link Set#of(Object) Set.of} method.
+   * @param tool    the {@link #getName() tool name}.
+   * @param tags    the {@link #getTags() tags} classifying the tool. Should be created via {@link Set#of(Object) Set.of} method.
    */
   public ToolCommandlet(IdeContext context, String tool, Set<Tag> tags) {
 
@@ -92,10 +97,10 @@ public abstract class ToolCommandlet extends Commandlet implements Tags {
    *
    * @param processMode see {@link ProcessMode}
    * @param toolVersion the explicit version (pattern) to run. Typically {@code null} to ensure the configured version is installed and use that one. Otherwise,
-   * the specified version will be installed in the software repository without touching and IDE installation and used to run.
-   * @param args the command-line arguments to run the tool.
+   *                    the specified version will be installed in the software repository without touching and IDE installation and used to run.
+   * @param args        the command-line arguments to run the tool.
    */
-  public void runTool(ProcessMode processMode, VersionIdentifier toolVersion, String... args) {
+  public void runTool(ProcessMode processMode, VersionRange toolVersion, String... args) {
 
     Path binaryPath;
     Path toolPath = Path.of(getBinaryName());
@@ -112,10 +117,10 @@ public abstract class ToolCommandlet extends Commandlet implements Tags {
 
   /**
    * @param toolVersion the explicit {@link VersionIdentifier} of the tool to run.
-   * @param args the command-line arguments to run the tool.
-   * @see ToolCommandlet#runTool(ProcessMode, VersionIdentifier, String...)
+   * @param args        the command-line arguments to run the tool.
+   * @see ToolCommandlet#runTool(ProcessMode, VersionRange, String...)
    */
-  public void runTool(VersionIdentifier toolVersion, String... args) {
+  public void runTool(VersionRange toolVersion, String... args) {
 
     runTool(ProcessMode.DEFAULT, toolVersion, args);
   }
@@ -138,7 +143,7 @@ public abstract class ToolCommandlet extends Commandlet implements Tags {
   }
 
   /**
-   * @param tool the tool name.
+   * @param tool    the tool name.
    * @param edition the edition.
    * @return the {@link #getName() tool} with its {@link #getEdition() edition}. The edition will be omitted if same as tool.
    */
@@ -272,7 +277,7 @@ public abstract class ToolCommandlet extends Commandlet implements Tags {
    * Sets the tool version in the environment variable configuration file.
    *
    * @param version the version to set. May also be a {@link VersionIdentifier#isPattern() version pattern}.
-   * @param hint - {@code true} to print the installation hint, {@code false} otherwise.
+   * @param hint    - {@code true} to print the installation hint, {@code false} otherwise.
    */
   public void setVersion(VersionIdentifier version, boolean hint) {
 
@@ -292,7 +297,7 @@ public abstract class ToolCommandlet extends Commandlet implements Tags {
     EnvironmentVariables declaringVariables = variables.findVariable(name);
     if ((declaringVariables != null) && (declaringVariables != settingsVariables)) {
       this.context.warning("The variable {} is overridden in {}. Please remove the overridden declaration in order to make the change affect.", name,
-          declaringVariables.getSource());
+              declaringVariables.getSource());
     }
     if (hint) {
       this.context.info("To install that version call the following command:");
@@ -314,7 +319,7 @@ public abstract class ToolCommandlet extends Commandlet implements Tags {
    * Sets the tool edition in the environment variable configuration file.
    *
    * @param edition the edition to set
-   * @param hint - {@code true} to print the installation hint, {@code false} otherwise.
+   * @param hint    - {@code true} to print the installation hint, {@code false} otherwise.
    */
   public void setEdition(String edition, boolean hint) {
 
@@ -336,7 +341,7 @@ public abstract class ToolCommandlet extends Commandlet implements Tags {
     EnvironmentVariables declaringVariables = variables.findVariable(name);
     if ((declaringVariables != null) && (declaringVariables != settingsVariables)) {
       this.context.warning("The variable {} is overridden in {}. Please remove the overridden declaration in order to make the change affect.", name,
-          declaringVariables.getSource());
+              declaringVariables.getSource());
     }
     if (hint) {
       this.context.info("To install that edition call the following command:");

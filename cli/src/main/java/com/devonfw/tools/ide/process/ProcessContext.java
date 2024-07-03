@@ -7,7 +7,7 @@ import java.util.Objects;
 /**
  * Wrapper for {@link ProcessBuilder} to simplify its usage and avoid common mistakes and pitfalls.
  */
-public interface ProcessContext {
+public interface ProcessContext extends EnvironmentContext {
 
   /**
    * @param handling the desired {@link ProcessErrorHandling}.
@@ -25,8 +25,8 @@ public interface ProcessContext {
    * Sets the executable command to be {@link #run()}.
    *
    * @param executable the {@link Path} to the command to be executed by {@link #run()}. Depending on your operating
-   *        system and the extension of the executable or OS specific conventions. So e.g. a *.cmd or *.bat file will be
-   *        called via CMD shell on windows while a *.sh file will be called via Bash, etc.
+   *                   system and the extension of the executable or OS specific conventions. So e.g. a *.cmd or *.bat file will be
+   *                   called via CMD shell on windows while a *.sh file will be called via Bash, etc.
    * @return this {@link ProcessContext} for fluent API calls.
    */
   ProcessContext executable(Path executable);
@@ -111,19 +111,6 @@ public interface ProcessContext {
   }
 
   /**
-   * Sets or overrides the specified environment variable only for the planned {@link #run() process execution}. Please
-   * note that the environment variables are initialized when the {@link ProcessContext} is created. This method
-   * explicitly set an additional or overrides an existing environment and will have effect for each {@link #run()
-   * process execution} invoked from this {@link ProcessContext} instance. Be aware of such side-effects when reusing
-   * the same {@link ProcessContext} to {@link #run() run} multiple commands.
-   *
-   * @param key the name of the environment variable (E.g. "PATH").
-   * @param value the value of the environment variable.
-   * @return this {@link ProcessContext} for fluent API calls.
-   */
-  ProcessContext withEnvVar(String key, String value);
-
-  /**
    * Runs the previously configured {@link #executable(Path) command} with the configured {@link #addArgs(String...)
    * arguments}. Will reset the {@link #addArgs(String...) arguments} but not the {@link #executable(Path) command} for
    * sub-sequent calls.
@@ -145,4 +132,7 @@ public interface ProcessContext {
    */
   ProcessResult run(ProcessMode processMode);
 
+  @Override
+  ProcessContext withEnvVar(String key, String value);
+  
 }

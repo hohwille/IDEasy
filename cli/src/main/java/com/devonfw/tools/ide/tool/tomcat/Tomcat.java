@@ -4,7 +4,6 @@ import com.devonfw.tools.ide.common.Tag;
 import com.devonfw.tools.ide.context.IdeContext;
 import com.devonfw.tools.ide.environment.EnvironmentVariables;
 import com.devonfw.tools.ide.environment.EnvironmentVariablesType;
-import com.devonfw.tools.ide.property.EnumProperty;
 import com.devonfw.tools.ide.tool.LocalToolCommandlet;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -23,8 +22,6 @@ public class Tomcat extends LocalToolCommandlet {
 
   private final HashMap<String, String> dependenciesEnvVariableNames = new HashMap<>();
 
-  public final EnumProperty<TomcatCommand> command;
-
   /**
    * The constructor.
    *
@@ -32,9 +29,8 @@ public class Tomcat extends LocalToolCommandlet {
    */
   public Tomcat(IdeContext context) {
 
-    super(context, "tomcat", Set.of(Tag.JAVA));
-    this.command = add(new EnumProperty<>("", true, "command", TomcatCommand.class));
-    //  add(this.arguments);
+    super(context, "tomcat", Set.of(Tag.JAVA, Tag.HTTP));
+    add(this.arguments);
   }
 
   @Override
@@ -56,58 +52,11 @@ public class Tomcat extends LocalToolCommandlet {
   }
 
   @Override
-  public void run() {
-
-    Path toolPath = getToolPath();
-    if (!toolPath.toFile().exists()) {
-      super.install(true);
-    }
-
-    TomcatCommand command = this.command.getValue();
-
-    switch (command) {
-      case START:
-        printTomcatPort();
-        arguments.setValueAsString("start", context);
-        super.run();
-        break;
-      case STOP:
-        arguments.setValueAsString("stop", context);
-        super.run();
-        break;
-      default:
-    }
-  }
-
-  @Override
   protected String getBinaryName() {
 
-    TomcatCommand command = this.command.getValue();
-
-    Path toolBinPath = getToolBinPath();
-
-    String tomcatHome = null;
-
-    if (this.context.getSystemInfo().isWindows()) {
-      if (command.equals(TomcatCommand.START)) {
-        tomcatHome = "startup.bat";
-      } else if (command.equals(TomcatCommand.STOP)) {
-        tomcatHome = "shutdown.bat";
-      } else {
-        this.context.error("Unknown tomcat command");
-      }
-    } else {
-      if (command.equals(TomcatCommand.START)) {
-        tomcatHome = "startup.sh";
-      } else if (command.equals(TomcatCommand.STOP)) {
-        tomcatHome = "shutdown.sh";
-      } else {
-        this.context.error("Unknown tomcat command");
-      }
-    }
-
-    return toolBinPath.resolve(tomcatHome).toString();
+    return "catalina.sh";
   }
+
 
   @Override
   protected HashMap<String, String> listOfDependencyEnvVariableNames() {
