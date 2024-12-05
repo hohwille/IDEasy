@@ -812,12 +812,13 @@ public abstract class AbstractIdeContext implements IdeContext {
             }
           }
         }
+        this.startContext.activateLogging();
         if (firstResult != null) {
           throw new CliException(firstResult.getErrorMessage());
         }
         step.error("Invalid arguments: {}", current.getArgs());
       }
-
+      this.startContext.activateLogging();
       HelpCommandlet help = this.commandletManager.getCommandlet(HelpCommandlet.class);
       if (firstCandidate != null) {
         help.commandlet.setValue(firstCandidate);
