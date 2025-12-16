@@ -2,7 +2,6 @@ package com.devonfw.tools.ide.git.repository;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -97,12 +96,17 @@ public class RepositoryCommandlet extends Commandlet {
       return;
     }
     this.context.debug("Repository configuration: {}", repositoryConfig);
-    List<Path> repositoryPaths = getRepositoryPaths(repositoryConfig, repositoryId);
+    List<String> workspaces = repositoryConfig.workspaces();
+    String repositoryRelativePath = repositoryConfig.path();
+    if (repositoryRelativePath == null) {
+      repositoryRelativePath = repositoryId;
+    }
     Path ideStatusDir = this.context.getIdeHome().resolve(IdeContext.FOLDER_DOT_IDE);
     this.context.getFileAccess().mkdirs(ideStatusDir);
 
-    for (Path repositoryPath : repositoryPaths) {
-      String workspaceName = getWorkspaceName(repositoryPath);
+    for (String workspaceName : workspaces) {
+      Path workspacePath = this.context.getIdeHome().resolve(IdeContext.FOLDER_WORKSPACES).resolve(workspaceName);
+      Path repositoryPath = workspacePath.resolve(repositoryRelativePath);
       if (Files.isDirectory(repositoryPath.resolve(GitContext.GIT_FOLDER))) {
         this.context.info("Repository {} already exists in workspace {} at {}", repositoryId, workspaceName, repositoryPath);
         if (!(this.context.isForceMode() || this.context.isForceRepositories())) {
@@ -134,33 +138,6 @@ public class RepositoryCommandlet extends Commandlet {
       this.context.getGitContext().pullOrClone(gitUrl, repositoryPath);
       fileAccess.touch(repositoryCreatedStatusFile);
     });
-  }
-
-  private List<Path> getRepositoryPaths(RepositoryConfig repositoryConfig, String repositoryId) {
-    List<String> workspaces = repositoryConfig.workspaces();
-    if (workspaces == null || workspaces.isEmpty()) {
-      workspaces = List.of(IdeContext.WORKSPACE_MAIN);
-    }
-    String repositoryRelativePath = repositoryConfig.path();
-    if (repositoryRelativePath == null) {
-      repositoryRelativePath = repositoryId;
-    }
-    List<Path> repositoryPaths = new ArrayList<>();
-    for (String workspace : workspaces) {
-      Path workspacePath = this.context.getIdeHome().resolve(IdeContext.FOLDER_WORKSPACES).resolve(workspace);
-      repositoryPaths.add(workspacePath.resolve(repositoryRelativePath));
-    }
-    return repositoryPaths;
-  }
-
-  private String getWorkspaceName(Path repositoryPath) {
-    Path workspacesFolder = this.context.getIdeHome().resolve(IdeContext.FOLDER_WORKSPACES);
-    Path workspaceFolder = this.context.getFileAccess().findAncestor(repositoryPath, workspacesFolder, 1);
-    if (workspaceFolder == null) {
-      this.context.warning("Internal error trying to determine workspace from path {}", repositoryPath);
-      return IdeContext.WORKSPACE_MAIN;
-    }
-    return workspaceFolder.getFileName().toString();
   }
 
   private boolean buildRepository(RepositoryConfig repositoryConfig, Path repositoryPath) {

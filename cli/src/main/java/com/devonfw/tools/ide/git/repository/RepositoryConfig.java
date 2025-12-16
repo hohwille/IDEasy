@@ -62,6 +62,12 @@ public record RepositoryConfig(
   /** Legacy {@link RepositoryProperties#getProperty(String) property name} for {@link #imports()}. */
   public static final String PROPERTY_ECLIPSE = "eclipse";
 
+  public RepositoryConfig {
+    if (workspaces == null || workspaces.isEmpty()) {
+      throw new IllegalArgumentException("workspaces cannot be empty");
+    }
+  }
+
   /**
    * @return the {@link GitUrl} from {@link #gitUrl()} and {@link #gitBranch()}.
    */
