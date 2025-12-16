@@ -102,12 +102,17 @@ public class RepositoryCommandlet extends Commandlet {
       repositoryRelativePath = repositoryId;
     }
     Path ideStatusDir = this.context.getIdeHome().resolve(IdeContext.FOLDER_DOT_IDE);
-    this.context.getFileAccess().mkdirs(ideStatusDir);
+    FileAccess fileAccess = this.context.getFileAccess();
+    fileAccess.mkdirs(ideStatusDir);
 
+    Path firstRepository = null;
     for (String workspaceName : workspaces) {
       Path workspacePath = this.context.getIdeHome().resolve(IdeContext.FOLDER_WORKSPACES).resolve(workspaceName);
       Path repositoryPath = workspacePath.resolve(repositoryRelativePath);
       if (Files.isDirectory(repositoryPath.resolve(GitContext.GIT_FOLDER))) {
+        if (firstRepository == null) {
+          firstRepository = repositoryPath;
+        }
         this.context.info("Repository {} already exists in workspace {} at {}", repositoryId, workspaceName, repositoryPath);
         if (!(this.context.isForceMode() || this.context.isForceRepositories())) {
           this.context.info("Ignoring repository {} in workspace {} - use --force or --force-repositories to rerun setup.", repositoryId, workspaceName);
@@ -122,10 +127,16 @@ public class RepositoryCommandlet extends Commandlet {
           continue;
         }
       }
-      boolean success = cloneOrPullRepository(repositoryPath, gitUrl, repositoryCreatedStatusFile);
-      if (success) {
-        buildRepository(repositoryConfig, repositoryPath);
-        importRepository(repositoryConfig, repositoryPath, repositoryId);
+      if (firstRepository == null) {
+        boolean success = cloneOrPullRepository(repositoryPath, gitUrl, repositoryCreatedStatusFile);
+        if (success) {
+          firstRepository = repositoryPath;
+          buildRepository(repositoryConfig, repositoryPath);
+          importRepository(repositoryConfig, repositoryPath, repositoryId);
+        }
+      } else {
+        fileAccess.mkdirs(repositoryPath.getParent());
+        fileAccess.symlink(firstRepository, repositoryPath);
       }
     }
   }
