@@ -167,7 +167,7 @@ public class RepositoryCommandletTest extends AbstractIdeContextTest {
     Properties properties = createDefaultProperties();
     String workspace1 = "workspace1";
     String workspace2 = "workspace2";
-    properties.setProperty("workspace", workspace1 + "," + workspace2);
+    properties.setProperty("workspaces", workspace1 + "," + workspace2);
     RepositoryCommandlet rc = context.getCommandletManager().getCommandlet(RepositoryCommandlet.class);
     saveProperties(context, properties);
     rc.repository.setValueAsString("test", context);
@@ -190,7 +190,7 @@ public class RepositoryCommandletTest extends AbstractIdeContextTest {
     String workspace1 = "workspace1";
     String workspace2 = "workspace2";
     String workspace3 = "workspace3";
-    properties.setProperty("workspace", workspace1 + " , " + workspace2 + ", " + workspace3);
+    properties.setProperty("workspaces", workspace1 + " , " + workspace2 + ", " + workspace3);
     RepositoryCommandlet rc = context.getCommandletManager().getCommandlet(RepositoryCommandlet.class);
     saveProperties(context, properties);
     rc.repository.setValueAsString("test", context);

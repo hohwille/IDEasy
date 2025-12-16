@@ -123,7 +123,13 @@ final class RepositoryProperties {
    */
   public List<String> getWorkspaces() {
 
-    String workspaceProperty = this.properties.getProperty(RepositoryConfig.PROPERTY_WORKSPACE);
+    String workspaceProperty = this.properties.getProperty(RepositoryConfig.PROPERTY_WORKSPACES);
+    if (workspaceProperty == null) {
+      workspaceProperty = this.properties.getProperty("workspace");
+      if (workspaceProperty != null) {
+        this.context.debug("Property workspace is legacy, please change property name to workspaces in {}", this.file);
+      }
+    }
     if ((workspaceProperty != null) && !workspaceProperty.isEmpty()) {
       List<String> list = new ArrayList<>();
       Set<String> set = new HashSet<>();

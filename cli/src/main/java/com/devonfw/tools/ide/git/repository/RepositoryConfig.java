@@ -39,7 +39,7 @@ public record RepositoryConfig(
   public static final String PROPERTY_WORKING_SETS = "workingsets";
 
   /** {@link RepositoryProperties#getProperty(String) Property name} for {@link #workspaces()}. */
-  public static final String PROPERTY_WORKSPACE = "workspace";
+  public static final String PROPERTY_WORKSPACES = "workspaces";
 
   /** {@link RepositoryProperties#getProperty(String) Property name} for {@link #gitUrl()}. */
   public static final String PROPERTY_GIT_URL = "git_url";
