@@ -13,6 +13,9 @@ import com.devonfw.tools.ide.io.FileAccess;
 import com.devonfw.tools.ide.log.IdeLogEntry;
 import com.devonfw.tools.ide.log.IdeLogLevel;
 
+/**
+ * Test of {@link RepositoryCommandlet}.
+ */
 public class RepositoryCommandletTest extends AbstractIdeContextTest {
 
   private static final String PROJECT_REPOSITORY = "repository";
@@ -155,6 +158,7 @@ public class RepositoryCommandletTest extends AbstractIdeContextTest {
     assertThat(context.getIdeHome().resolve(IdeContext.FOLDER_WORKSPACES).resolve(TEST_WORKSPACE).resolve(TEST_REPO)).isDirectory();
     assertThat(context).logAtSuccess().hasMessage("Successfully ended step 'Setup of repository test'.");
   }
+
   @Test
   public void testSetupRepositoryWithMultipleWorkspaces() {
 
