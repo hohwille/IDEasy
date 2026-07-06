@@ -100,7 +100,7 @@ public abstract class AbstractUpdateCommandlet extends Commandlet {
     updateSettings();
     updateConf();
     reloadContext();
-    verifyIdeMinVersionForCommand();
+    this.context.verifyIdeMinVersion(true);
 
     updateSoftware();
     updateRepositories();
@@ -290,11 +290,6 @@ public abstract class AbstractUpdateCommandlet extends Commandlet {
       }
     }
     this.context.getGitContext().saveCurrentCommitId(settingsPath, this.context.getSettingsCommitIdPath());
-  }
-
-  protected void verifyIdeMinVersionForCommand() {
-
-    this.context.verifyIdeMinVersion(true);
   }
 
   private void updateSoftware() {

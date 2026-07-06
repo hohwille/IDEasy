@@ -156,17 +156,18 @@ class CreateCommandletTest extends AbstractIdeContextTest {
     variables.getByType(EnvironmentVariablesType.CONF).set("IDE_MIN_VERSION", ideMinVersion);
     IdeVersion.setMockVersionForTesting("2024.01.001"); // mocks the current version (instead of using SNAPSHOT)
     String ideCurrentVersion = IdeVersion.getVersionString();
-    CliArguments args = new CliArguments();
+    CliArguments args = new CliArguments("status");
     String warningMessage = String.format("Your version of IDEasy is currently %s\n"
-        + "However, this is too old as your project requires at latest version %s\n"
-        + "Please run the following command to update to the latest version of IDEasy and fix the problem:\n"
-        + "ide upgrade", ideCurrentVersion, ideMinVersion);
+        + "However, this is too old as your project requires at latest version %s", ideCurrentVersion, ideMinVersion);
+    String interactionMessage = "Please run the following command to update to the latest version of IDEasy and fix the problem:\n"
+        + "ide upgrade";
 
     // act
     context.run(args);
 
     // assert
     assertThat(context).logAtWarning().hasMessage(warningMessage);
+    assertThat(context).logAtInteraction().hasMessage(interactionMessage);
   }
 
   @Test
@@ -179,10 +180,6 @@ class CreateCommandletTest extends AbstractIdeContextTest {
     EnvironmentVariables variables = context.getVariables();
     String ideVersion = IdeVersion.getVersionIdentifier().toString();
     variables.getByType(EnvironmentVariablesType.CONF).set("IDE_MIN_VERSION", ideVersion);
-    String errorMessage = String.format("Your version of IDEasy is currently %s\n"
-        + "However, this is too old as your project requires at latest version %s\n"
-        + "Please run the following command to update to the latest version of IDEasy and fix the problem:\n"
-        + "ide upgrade", ideVersion, ideVersion);
     Path newProjectPath = context.getIdeRoot().resolve(NEW_PROJECT_NAME);
 
     // act
@@ -196,10 +193,9 @@ class CreateCommandletTest extends AbstractIdeContextTest {
     assertThat(newProjectPath.resolve(IdeContext.FOLDER_WORKSPACES).resolve(IdeContext.WORKSPACE_MAIN)).exists();
     assertThat(context.getFileAccess().readFileContent(newProjectPath.resolve(IdeContext.FILE_SOFTWARE_VERSION)))
         .isEqualTo(IdeVersion.getVersionString());
-    assertThat(context).logAtError().hasNoMessageContaining(errorMessage);
-    assertThat(context).logAtWarning()
-        .hasNoMessageContaining("However, this is too old as your project requires at latest version");
-    assertThat(context).logAtSuccess()
+    assertThat(context).log()
+        .hasNoMessageContaining("However, this is too old as your project requires at latest version")
+        .hasNoMessageContaining("run the following command to update to the latest version of IDEasy")
         .hasMessageContaining("Successfully created new project '" + NEW_PROJECT_NAME + "'.");
   }
 
