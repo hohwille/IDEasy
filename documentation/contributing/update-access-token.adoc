@@ -27,6 +27,7 @@ Click on `Generate new token` to create a new token.
 +
 image::../images/AccessToken2.png["New fine-grained personal access token"]
 . In `Repository permissions` select `Read and write` for `Contents` (and `Metadata`).
++
 image::../images/AccessToken3.png["Repository permissions"]
 . Click on `Generate token` to proceed.
 . On the confirmation page click again on `Generate token` to proceed.
