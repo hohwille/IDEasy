@@ -93,12 +93,6 @@ public class CreateCommandlet extends AbstractUpdateCommandlet {
     return "Create (clone) " + (isCodeRepository() ? "code" : "settings") + " repository";
   }
 
-  @Override
-  protected void verifyIdeMinVersionForCommand() {
-
-    this.context.verifyIdeMinVersion(true);
-  }
-
   private void logWelcomeMessage() {
     Path settingsFolder = this.context.getSettingsPath();
     if (Files.exists(settingsFolder)) {

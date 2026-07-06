@@ -294,7 +294,7 @@ public abstract class AbstractUpdateCommandlet extends Commandlet {
 
   protected void verifyIdeMinVersionForCommand() {
 
-    this.context.verifyIdeMinVersion(false);
+    this.context.verifyIdeMinVersion(true);
   }
 
   private void updateSoftware() {
