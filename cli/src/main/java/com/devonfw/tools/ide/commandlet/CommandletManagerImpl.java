@@ -47,6 +47,7 @@ import com.devonfw.tools.ide.tool.kubectl.KubeCtl;
 import com.devonfw.tools.ide.tool.lazydocker.LazyDocker;
 import com.devonfw.tools.ide.tool.msvc.Msvc;
 import com.devonfw.tools.ide.tool.mvn.Mvn;
+import com.devonfw.tools.ide.tool.mvnd.Mvnd;
 import com.devonfw.tools.ide.tool.nest.Nest;
 import com.devonfw.tools.ide.tool.ng.Ng;
 import com.devonfw.tools.ide.tool.node.Node;
@@ -172,6 +173,7 @@ public class CommandletManagerImpl implements CommandletManager {
     add(new Nest(context));
     add(new Cdk(context));
     add(new Claude(context));
+    add(new Mvnd(context));
     add(new Just(context));
   }
 
