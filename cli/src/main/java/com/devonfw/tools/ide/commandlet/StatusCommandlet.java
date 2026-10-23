@@ -99,6 +99,12 @@ public class StatusCommandlet extends AbstractCommandlet {
 
   private void logSettingsGitStatus() {
     Path settingsPath = this.context.getSettingsGitRepository();
+    if (settingsPath == null) {
+      if (this.context.getIdeHome() != null) {
+        LOG.error("No settings repository was found.");
+      }
+      return;
+    }
     GitContext gitContext = this.context.getGitContext();
     if (gitContext.isRepositoryUpdateAvailable(settingsPath, this.context.getSettingsCommitIdPath())) {
       if (RepositoryType.ofSettingsPath(this.context.getSettingsPath(), context) != RepositoryType.CODE_SETTINGS_COMBINED) {
