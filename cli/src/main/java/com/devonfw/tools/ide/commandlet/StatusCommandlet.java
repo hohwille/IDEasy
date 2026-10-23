@@ -99,24 +99,18 @@ public class StatusCommandlet extends AbstractCommandlet {
 
   private void logSettingsGitStatus() {
     Path settingsPath = this.context.getSettingsGitRepository();
-    if (settingsPath == null) {
-      if (this.context.getIdeHome() != null) {
-        LOG.error("No settings repository was found.");
+    GitContext gitContext = this.context.getGitContext();
+    if (gitContext.isRepositoryUpdateAvailable(settingsPath, this.context.getSettingsCommitIdPath())) {
+      if (RepositoryType.ofSettingsPath(this.context.getSettingsPath(), context) != RepositoryType.CODE_SETTINGS_COMBINED) {
+        LOG.warn("Your settings are not up-to-date, please run 'ide update'.");
       }
     } else {
-      GitContext gitContext = this.context.getGitContext();
-      if (gitContext.isRepositoryUpdateAvailable(settingsPath, this.context.getSettingsCommitIdPath())) {
-        if (RepositoryType.ofSettingsPath(this.context.getSettingsPath(), context) != RepositoryType.CODE_SETTINGS_COMBINED) {
-          LOG.warn("Your settings are not up-to-date, please run 'ide update'.");
-        }
-      } else {
-        IdeLogLevel.SUCCESS.log(LOG, "Your settings are up-to-date.");
-      }
-      String branch = gitContext.determineCurrentBranch(settingsPath);
-      LOG.debug("Your settings branch is {}", branch);
-      if (!"master".equals(branch) && !"main".equals(branch)) {
-        LOG.warn("Your settings are on a custom branch: {}", branch);
-      }
+      IdeLogLevel.SUCCESS.log(LOG, "Your settings are up-to-date.");
+    }
+    String branch = gitContext.determineCurrentBranch(settingsPath);
+    LOG.debug("Your settings branch is {}", branch);
+    if (!"master".equals(branch) && !"main".equals(branch)) {
+      LOG.warn("Your settings are on a custom branch: {}", branch);
     }
   }
 
